@@ -80,19 +80,31 @@ app.use((req, res, next) => {
     await setupVite(httpServer, app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || "5000", 10);
-  httpServer.listen(
-    {
-      port,
-      host: "0.0.0.0",
-      reusePort: true,
-    },
-    () => {
+  // Try to listen on the preferred port; if it's in use, automatically try
+  // the next port up until we find a free one.
+  const preferredPort = parseInt(process.env.PORT || "5000", 10);
+
+  function startServer(port: number) {
+    httpServer.listen({ port, host: "127.0.0.1" }, () => {
+      console.log(`\n🚀 Server started on http://localhost:${port}\n`);
       log(`serving on port ${port}`);
-    },
-  );
+      if (port !== preferredPort) {
+        log(`(port ${preferredPort} was in use, using ${port} instead)`);
+      }
+    });
+
+    httpServer.on("error", (err: NodeJS.ErrnoException) => {
+      if (err.code === "EADDRINUSE") {
+        log(`port ${port} is in use, trying ${port + 1}...`);
+        httpServer.close();
+        // Remove the error listener so it doesn't fire again on the next attempt
+        httpServer.removeAllListeners("error");
+        startServer(port + 1);
+      } else {
+        throw err;
+      }
+    });
+  }
+
+  startServer(preferredPort);
 })();
