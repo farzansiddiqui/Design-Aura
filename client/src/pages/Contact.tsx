@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
-import { SiFacebook, SiInstagram, SiPinterest, SiLinkedin } from "react-icons/si";
+import { SiFacebook, SiInstagram, SiPinterest, SiLinkedin, SiWhatsapp } from "react-icons/si";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
@@ -41,10 +41,27 @@ export default function Contact() {
 
   const onSubmit = (data: ContactFormValues) => {
     console.log("Contact form submitted:", data);
+
+    // Construct WhatsApp message
+    const whatsappNumber = "919643665648";
+    const text = `New Inquiry from ${data.name}
+-----------------------------
+Email: ${data.email}
+Phone: ${data.phone || 'N/A'}
+Project Type: ${data.projectType}
+Budget: ${data.budget || 'N/A'}
+Message: ${data.message}`;
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+
+    // Open WhatsApp
+    window.open(whatsappUrl, "_blank");
+
     toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. We'll get back to you within 24 hours.",
+      title: "Opening WhatsApp...",
+      description: "Redirecting you to send your inquiry via WhatsApp.",
     });
+
     form.reset();
   };
 
@@ -61,13 +78,13 @@ export default function Contact() {
               Let's Start Your Project
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Ready to transform your space? Contact us for a free consultation 
+              Ready to transform your space? Contact us for a free consultation
               and let's discuss your vision.
             </p>
           </div>
         </section>
 
-        <section className="pb-20" data-testid="section-contact-form">
+        <section className="pb-20" id="contact-form" data-testid="section-contact-form">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
               <div className="lg:col-span-2 space-y-8">
@@ -79,8 +96,8 @@ export default function Contact() {
                       <div>
                         <p className="font-medium">Visit Our Studio</p>
                         <p className="text-muted-foreground text-sm">
-                          123 Design Avenue, Suite 400<br />
-                          New York, NY 10001
+                          Om Chambers, 648/A, 4th floor,<br />
+                          Binnamangla 1st Stage, Indiranagar, Bangalore 560038
                         </p>
                       </div>
                     </div>
@@ -88,14 +105,29 @@ export default function Contact() {
                       <Phone className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                       <div>
                         <p className="font-medium">Call Us</p>
-                        <p className="text-muted-foreground text-sm">+1 (555) 123-4567</p>
+                        <p className="text-muted-foreground text-sm">+91-9643665648</p>
+                        <p className="text-muted-foreground text-sm">+91-7088188901</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <SiWhatsapp className="h-5 w-5 text-[#25D366] mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-medium">WhatsApp</p>
+                        <a
+                          href="https://wa.me/919643665648"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted-foreground text-sm hover:text-primary transition-colors"
+                        >
+                          Message us on WhatsApp
+                        </a>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
                       <Mail className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                       <div>
                         <p className="font-medium">Email Us</p>
-                        <p className="text-muted-foreground text-sm">hello@atelierinteriors.com</p>
+                        <p className="text-muted-foreground text-sm">hello@homeprojectstudio.com</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
@@ -103,8 +135,8 @@ export default function Contact() {
                       <div>
                         <p className="font-medium">Business Hours</p>
                         <p className="text-muted-foreground text-sm">
-                          Mon - Fri: 9:00 AM - 6:00 PM<br />
-                          Sat: 10:00 AM - 4:00 PM
+                          Tue - Sun: 10:30 AM - 7:00 PM<br />
+
                         </p>
                       </div>
                     </div>
@@ -114,24 +146,35 @@ export default function Contact() {
                 <Card className="p-8 space-y-4">
                   <h3 className="font-serif text-xl">Follow Us</h3>
                   <div className="flex items-center gap-3">
-                    <Button size="icon" variant="outline" data-testid="link-contact-facebook">
-                      <SiFacebook className="h-5 w-5" />
+                    <Button size="icon" variant="outline" asChild data-testid="link-contact-whatsapp">
+                      <a href="https://wa.me/919643665648" target="_blank" rel="noopener noreferrer">
+                        <SiWhatsapp className="h-5 w-5 text-[#25D366]" />
+                      </a>
                     </Button>
-                    <Button size="icon" variant="outline" data-testid="link-contact-instagram">
-                      <SiInstagram className="h-5 w-5" />
+                    <Button size="icon" variant="outline" asChild data-testid="link-contact-facebook">
+                      <a href="https://www.facebook.com/profile.php?id=61583653915873" target="_blank" rel="noopener noreferrer">
+                        <SiFacebook className="h-5 w-5" />
+                      </a>
                     </Button>
-                    <Button size="icon" variant="outline" data-testid="link-contact-pinterest">
-                      <SiPinterest className="h-5 w-5" />
+                    <Button size="icon" variant="outline" asChild data-testid="link-contact-instagram">
+                      <a href="https://www.instagram.com/thehomeprojectstudio?igsh=cTA3YWg0NHYxNWc5" target="_blank" rel="noopener noreferrer">
+                        <SiInstagram className="h-5 w-5" />
+                      </a>
                     </Button>
-                    <Button size="icon" variant="outline" data-testid="link-contact-linkedin">
-                      <SiLinkedin className="h-5 w-5" />
+                    {/* <Button size="icon" variant="outline" data-testid="link-contact-pinterest">
+                        <SiPinterest className="h-5 w-5" />
+                      </Button> */}
+                    <Button size="icon" variant="outline" asChild data-testid="link-contact-linkedin">
+                      <a href="https://www.linkedin.com/company/112417567/admin/dashboard/" target="_blank" rel="noopener noreferrer">
+                        <SiLinkedin className="h-5 w-5" />
+                      </a>
                     </Button>
                   </div>
                 </Card>
 
                 <div className="rounded-lg overflow-hidden h-64">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425878428698!3d40.74076794379132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sGoogle!5e0!3m2!1sen!2sus!4v1234567890"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8259200000807!2d77.6403575!3d12.982983500000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1745d457345b%3A0xb966b074f9f8ef2a!2sOm%20Chambers!5e0!3m2!1sen!2sin!4v1771754751593!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -184,7 +227,16 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel>Phone Number</FormLabel>
                             <FormControl>
-                              <Input placeholder="+1 (555) 123-4567" {...field} data-testid="input-contact-phone" />
+                              <Input
+                                placeholder="9876543210"
+                                type="tel"
+                                {...field}
+                                onChange={(e) => {
+                                  const value = e.target.value.replace(/\D/g, "");
+                                  field.onChange(value.slice(0, 10));
+                                }}
+                                data-testid="input-contact-phone"
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -204,7 +256,7 @@ export default function Contact() {
                               </FormControl>
                               <SelectContent>
                                 <SelectItem value="residential">Residential Design</SelectItem>
-                                <SelectItem value="commercial">Commercial Spaces</SelectItem>
+                                <SelectItem value="commercial">Architectural Construction</SelectItem>
                                 <SelectItem value="modular">Modular Interiors</SelectItem>
                                 <SelectItem value="renovation">Luxury Renovation</SelectItem>
                                 <SelectItem value="consultation">Design Consultation</SelectItem>
@@ -229,11 +281,11 @@ export default function Contact() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="under-25k">Under $25,000</SelectItem>
-                              <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
-                              <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                              <SelectItem value="100k-250k">$100,000 - $250,000</SelectItem>
-                              <SelectItem value="over-250k">Over $250,000</SelectItem>
+                              <SelectItem value="under-2l">Under ₹2 Lakh</SelectItem>
+                              <SelectItem value="2l-5l">₹2 Lakh - ₹5 Lakh</SelectItem>
+                              <SelectItem value="5l-10l">₹5 Lakh - ₹10 Lakh</SelectItem>
+                              <SelectItem value="10l-15l">₹10 Lakh - ₹15 Lakh</SelectItem>
+                              <SelectItem value="over-15l">Over ₹15 Lakh</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />

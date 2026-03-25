@@ -1,31 +1,31 @@
-import { Award, Clock, Shield, Building } from "lucide-react";
+import { MapPin, Clock, Shield, Building } from "lucide-react";
 
 const stats = [
   {
     icon: Building,
-    value: "500+",
+    value: "50+",
     label: "Projects Completed",
     description: "Luxury homes and commercial spaces transformed",
   },
   {
     icon: Shield,
-    value: "10",
+    value: "15",
     suffix: " Years",
     label: "Warranty",
     description: "Every material backed with long-term guarantee",
   },
   {
     icon: Clock,
-    value: "60",
+    value: "45",
     suffix: " Days",
     label: "Delivery",
     description: "Fast-track delivery without compromising quality",
   },
   {
-    icon: Award,
-    value: "25+",
-    label: "Design Awards",
-    description: "Recognized excellence in interior design",
+    icon: MapPin,
+    value: "10+",
+    label: "Cities",
+    description: "Serving clients across major metropolitan areas",
   },
 ];
 

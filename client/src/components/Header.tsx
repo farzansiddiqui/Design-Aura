@@ -36,21 +36,18 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? "bg-background/95 backdrop-blur-md border-b border-border"
+        : "bg-transparent"
+        }`}
       data-testid="header"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4 h-20">
           <Link href="/" className="flex items-center gap-2" data-testid="link-home-logo">
-            <span className="font-serif text-2xl font-semibold tracking-tight">
-              Atelier
-            </span>
-            <span className="font-serif text-2xl text-muted-foreground">
-              Interiors
+            <span className="font-serif text-2xl font-semibold tracking-tight leading-tight">
+              <span className="block">The Home</span>
+              <span className="block mt-1 sm:mt-0"><span>Project </span><span className="text-muted-foreground">Studio</span></span>
             </span>
           </Link>
 
@@ -59,11 +56,10 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium tracking-wide transition-colors ${
-                  location === link.href
-                    ? "text-foreground"
-                    : "text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 rounded-md"
-                }`}
+                className={`text-sm font-medium tracking-wide transition-colors ${location === link.href
+                  ? "text-foreground"
+                  : "text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 rounded-md"
+                  }`}
                 data-testid={`link-nav-${link.label.toLowerCase()}`}
               >
                 {link.label}
@@ -81,9 +77,11 @@ export default function Header() {
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
 
-            <Button className="hidden sm:flex" data-testid="button-get-quote">
-              Get a Quote
-            </Button>
+            <Link href="/contact">
+              <Button className="hidden sm:flex" data-testid="button-get-quote">
+                Get a Quote
+              </Button>
+            </Link>
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="lg:hidden">
@@ -102,20 +100,21 @@ export default function Header() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setIsOpen(false)}
-                        className={`text-lg font-medium py-2 transition-colors ${
-                          location === link.href
-                            ? "text-foreground"
-                            : "text-muted-foreground"
-                        }`}
+                        className={`text-lg font-medium py-2 transition-colors ${location === link.href
+                          ? "text-foreground"
+                          : "text-muted-foreground"
+                          }`}
                         data-testid={`link-mobile-${link.label.toLowerCase()}`}
                       >
                         {link.label}
                       </Link>
                     ))}
                   </nav>
-                  <Button className="w-full mt-4" data-testid="button-mobile-quote">
-                    Get a Quote
-                  </Button>
+                  <Link href="/contact" onClick={() => setIsOpen(false)}>
+                    <Button className="w-full mt-4" data-testid="button-mobile-quote">
+                      Get a Quote
+                    </Button>
+                  </Link>
                 </div>
               </SheetContent>
             </Sheet>

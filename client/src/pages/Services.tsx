@@ -6,7 +6,7 @@ import { ArrowRight, Home, Building, Utensils, Palette, Sparkles, Ruler } from "
 import { Link } from "wouter";
 import kitchenImage from "@assets/generated_images/modern_luxury_kitchen.png";
 import bedroomImage from "@assets/generated_images/luxury_master_bedroom.png";
-import officeImage from "@assets/generated_images/modern_office_interior.png";
+import commercialArchImage from "@assets/generated_images/commercial_architecture.png";
 import livingRoomImage from "@assets/generated_images/luxury_living_room_hero.png";
 
 const services = [
@@ -21,10 +21,10 @@ const services = [
   {
     id: "commercial",
     icon: Building,
-    title: "Commercial Spaces",
+    title: "Architectural Construction",
     description: "Create inspiring work environments that enhance productivity, reflect your brand identity, and impress clients.",
     features: ["Office design", "Retail spaces", "Restaurant interiors", "Hotel lobbies", "Co-working spaces"],
-    image: officeImage,
+    image: commercialArchImage,
   },
   {
     id: "modular",
@@ -39,7 +39,7 @@ const services = [
     icon: Sparkles,
     title: "Luxury Renovations",
     description: "Premium renovation services that breathe new life into existing spaces with sophisticated upgrades.",
-    features: ["Premium materials", "High-end finishes", "Art curation", "Custom millwork", "Smart home integration"],
+    features: ["Premium materials", "High-end finishes", "Art curation", "Smart home integration"],
     image: livingRoomImage,
   },
 ];
@@ -66,7 +66,7 @@ export default function Services() {
               Complete Interior Solutions
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              From concept to completion, we offer comprehensive interior design services 
+              From concept to completion, we offer comprehensive interior design services
               tailored to your unique needs and aspirations.
             </p>
           </div>
@@ -79,9 +79,8 @@ export default function Services() {
                 <div
                   key={service.id}
                   id={service.id}
-                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                    index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                  }`}
+                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? "lg:flex-row-reverse" : ""
+                    }`}
                   data-testid={`service-${service.id}`}
                 >
                   <div className={`space-y-6 ${index % 2 === 1 ? "lg:order-2" : ""}`}>
@@ -155,7 +154,7 @@ export default function Services() {
               Ready to Start Your Project?
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
-              Contact us today for a free consultation and let's discuss how we can 
+              Contact us today for a free consultation and let's discuss how we can
               transform your space.
             </p>
             <Link href="/contact">

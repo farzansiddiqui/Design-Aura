@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SiFacebook, SiInstagram, SiPinterest, SiLinkedin } from "react-icons/si";
+import { SiFacebook, SiInstagram, SiPinterest, SiLinkedin, SiWhatsapp } from "react-icons/si";
 import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ const quickLinks = [
 
 const services = [
   "Residential Design",
-  "Commercial Spaces",
+  "Architectural Construction",
   "Modular Interiors",
   "Luxury Renovations",
   "Consultation",
@@ -36,26 +36,36 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <span className="font-serif text-2xl font-semibold">Atelier</span>
-              <span className="font-serif text-2xl text-muted-foreground">Interiors</span>
+            <div>
+              <span className="font-serif text-2xl font-semibold">The Home Project </span><span className="font-serif text-2xl text-muted-foreground">Studio</span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Creating timeless, personalized interiors that reflect your unique lifestyle. 
+              Creating timeless, personalized interiors that reflect your unique lifestyle.
               From concept to completion, we transform spaces into extraordinary living experiences.
             </p>
             <div className="flex items-center gap-3">
-              <Button size="icon" variant="ghost" data-testid="link-social-facebook">
-                <SiFacebook className="h-5 w-5" />
+              <Button size="icon" variant="ghost" asChild data-testid="link-social-whatsapp">
+                <a href="https://wa.me/919643665648" target="_blank" rel="noopener noreferrer">
+                  <SiWhatsapp className="h-5 w-5 text-[#25D366]" />
+                </a>
               </Button>
-              <Button size="icon" variant="ghost" data-testid="link-social-instagram">
-                <SiInstagram className="h-5 w-5" />
+              <Button size="icon" variant="ghost" asChild data-testid="link-social-facebook">
+                <a href="https://www.facebook.com/profile.php?id=61583653915873" target="_blank" rel="noopener noreferrer">
+                  <SiFacebook className="h-5 w-5" />
+                </a>
               </Button>
-              <Button size="icon" variant="ghost" data-testid="link-social-pinterest">
+              <Button size="icon" variant="ghost" asChild data-testid="link-social-instagram">
+                <a href="https://www.instagram.com/thehomeprojectstudio?igsh=cTA3YWg0NHYxNWc5" target="_blank" rel="noopener noreferrer">
+                  <SiInstagram className="h-5 w-5" />
+                </a>
+              </Button>
+              {/* <Button size="icon" variant="ghost" data-testid="link-social-pinterest">
                 <SiPinterest className="h-5 w-5" />
-              </Button>
-              <Button size="icon" variant="ghost" data-testid="link-social-linkedin">
-                <SiLinkedin className="h-5 w-5" />
+              </Button> */}
+              <Button size="icon" variant="ghost" asChild data-testid="link-social-linkedin">
+                <a href="https://www.linkedin.com/company/112417567/admin/dashboard/" target="_blank" rel="noopener noreferrer">
+                  <SiLinkedin className="h-5 w-5" />
+                </a>
               </Button>
             </div>
           </div>
@@ -96,16 +106,19 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-muted-foreground mt-0.5 flex-shrink-0" />
                 <span className="text-muted-foreground text-sm">
-                  123 Design Avenue, Suite 400<br />New York, NY 10001
+                  Om Chambers, 648/A, 4th floor,<br />Binnamangla 1st Stage, Indiranagar, Bangalore 560038
                 </span>
               </div>
-              <div className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                <span className="text-muted-foreground text-sm">+1 (555) 123-4567</span>
+              <div className="flex items-start gap-3">
+                <Phone className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                <div className="flex flex-col">
+                  <span className="text-muted-foreground text-sm">+91-9643665648</span>
+                  <span className="text-muted-foreground text-sm">+91-7088188901</span>
+                </div>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                <span className="text-muted-foreground text-sm">hello@atelierinteriors.com</span>
+                <span className="text-muted-foreground text-sm">hello@homeprojectstudio.com</span>
               </div>
             </div>
             <div className="space-y-3">
@@ -132,7 +145,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              2024 Atelier Interiors. All rights reserved.
+              2025 The Home Project Studio. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground" data-testid="link-privacy">
